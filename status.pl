@@ -1,3 +1,4 @@
+:- include(tokemon).
 status:-
 	write("+====================+"), nl,
 	write('|       STATUS       |'), nl,
