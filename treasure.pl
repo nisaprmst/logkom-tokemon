@@ -2,11 +2,11 @@
 :- include('map_move.pl').
 :- include('battle.pl').
 
-trasure(3,3,1).
-trasure(3,4,1).
-trasure(3,5,1).
-trasure(3,1,1).
-trasure(4,3,1).
+treasure(3,3,1).
+treasure(3,4,1).
+treasure(3,5,1).
+treasure(3,1,1).
+treasure(4,3,1).
 
 cekx:-
     here('x',X,Y),
@@ -24,7 +24,7 @@ cekx:-
     B is 1,
     write('+10 normal attack'),
     write('TAPIIII -15 health'),
-    write('ambil or skip?'),!.
+    ambilorno,!.
 
 cekx:-
     here('x',X,Y),
@@ -43,7 +43,7 @@ cekx:-
     write('+5 normal attack'),
     write('+5 skill')
     write('TAPIIII -10 health'),
-    write('ambil or skip?'),!.
+    ambilorno,!.
 
 cekx:-
     here('x',X,Y),
@@ -62,7 +62,7 @@ cekx:-
     write('+10 health')
     write('+15 normal attack'),
     write('TAPIIII -15 skill'),
-    write('ambil or skip?'),!.
+    ambilorno,!.
 
 cekx:-
     here('x',X,Y),
@@ -81,7 +81,7 @@ cekx:-
     write('+5 skill'),
     write('+5 health'),
     write('TAPIIII -5 normal attack'),
-    write('ambil or skip?'),!.
+    ambilorno,!.
 
 cekx:-
     here('x',X,Y),
@@ -100,7 +100,7 @@ cekx:-
     write('+5 skill'),
     write('+10 normal attack'),
     write('TAPIIII -20 health'),
-    write('ambil or skip?'),!.
+    ambilorno,!.
 
 ambilx:-
     here('x',X,Y),
@@ -251,3 +251,15 @@ ambilx:-
     assert(treasure(X,Y,new_b)),
 
     write('hore u just gain more normal attack and skill'),!.
+
+ambilorno:-
+    write('ambil or skip?'),
+    read(X),
+    X = 'ambil',
+    ambilx,!.
+
+ambilorno:-
+    write('ambil or skip?'),
+    read(X),
+    X = 'no',
+    write('ok silahkan lanjut'),!.
