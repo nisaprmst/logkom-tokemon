@@ -49,7 +49,7 @@ left:-
 	here('x', X, New),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, nl, !.
+	cekx, !.
 
 left:- 
 	/* command to move left, start battle */
@@ -86,7 +86,7 @@ up:-
 	here('x', New, Y),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, nl, !.
+	cekx, !.
 
 up:- 
 	/* command to move up, start battle */
@@ -123,7 +123,7 @@ right:-
 	here('x', X, New),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, nl, !.
+	cekx, !.
 
 right:- 
 	/* command to move right, start battle */
@@ -160,7 +160,7 @@ down:-
 	here('x', New, Y),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, nl, !.
+	cekx, !.
 
 down:- 
 	/* command to move down */
