@@ -1,3 +1,5 @@
+:- include('tokemon.pl').
+
 % ukuran peta = 10 x 10
 
 % variabel pemain
@@ -125,3 +127,9 @@ bawah:-
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
     write('Kamu bergerak ke bawah yey'), nl, !.
+
+ketemutokemon:-
+	random_between(1, 100, N),
+	tokemon(N, A),
+	write('Ada tokemon '), write(A), write('!'), nl,
+	write('Battle/run?'), nl, !.

@@ -1,53 +1,61 @@
 /* NAMA TOKEMON */
-tokemon(nandamon).
+tokemon(1, nandamon).
 health(100,nandamon).
 tipe(fire,nandamon).
 
-tokemon(ayyubmon).
+tokemon(2, ayyubmon).
 health(110,ayyubmon).
 tipe(water,ayyubmon).
 
-tokemon(ciscomon).
+tokemon(3, ciscomon).
 health(120,ciscomon).
 tipe(leaves, ciscomon).
 
-tokemon(dagomon).
+tokemon(4, dagomon).
 health(130,dagomon).
 tipe(grass,dagomon).
 
-tokemon(dikamon).
+tokemon(5, dikamon).
 health(140,dikamon).
 tipe(dark,dikamon).
 
-tokemon(fabianmon).
+tokemon(6, fabianmon).
 health(150,fabianmon).
 tipe(leaves, fabianmon).
 
-tokemon(edomon).
+tokemon(7, edomon).
 health(160,edomon).
 tipe(fire,edomon).
 
-tokemon(gillmon).
+tokemon(8, gillmon).
 health(170,gillmon).
 tipe(leaves,gillmon).
 
-tokemon(ojanmon).
+tokemon(9, ojanmon).
 health(180,ojanmon).
 tipe(grass, ojanmon).
 
-tokemon(rakamon).
+tokemon(10, rakamon).
 health(200,rakamon).
 tipe(dark,rakamon).
 
-legendtokemon(harlilimon).
+tokemon(11, liamon).
+health(200, liamon).
+tipe(grass, liamon).
+
+tokemon(12, ryanmon).
+health(200, ryanmon).
+tipe(fire, ryanmon).
+
+legendtokemon(13, harlilimon).
 health(500,harlilimon).
 tipe(leaves,harlilimon).
 
-legendtokemon(infallmon).
+legendtokemon(14, infallmon).
 health(600,infallmon).
 tipe(dark,infallmon).
 
-legendtokemon(judhimon).
+legendtokemon(15, judhimon).
 health(700, judhimon).
 tipe(water,judhimon).
 
