@@ -1,4 +1,5 @@
 :- include('tokemon.pl').
+:- include('treasure.pl').
 
 % ukuran peta = 10 x 10
 
@@ -46,7 +47,9 @@ left:-
 	playerloc(X, Y),
 	New is Y + 1,
 	here('x', X, New),
-	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+	cekx, nl, !.
 
 left:- 
 	/* command to move left, start battle */
@@ -81,7 +84,9 @@ up:-
 	playerloc(X, Y),
 	New is X - 1,
 	here('x', New, Y),
-	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+	cekx, nl, !.
 
 up:- 
 	/* command to move up, start battle */
@@ -116,7 +121,9 @@ right:-
 	playerloc(X, Y),
 	New is Y - 1,
 	here('x', X, New),
-	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+	cekx, nl, !.
 
 right:- 
 	/* command to move right, start battle */
@@ -151,7 +158,9 @@ down:-
 	playerloc(X, Y),
 	New is X + 1,
 	here('x', New, Y),
-	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+	cekx, nl, !.
 
 down:- 
 	/* command to move down */
