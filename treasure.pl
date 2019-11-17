@@ -14,7 +14,7 @@ cekx:-
     X is 3,
     Y is 3,
     B is 0,
-    write('gada bray kan td udh diambil'),!.
+    write('gada bray kan td udh diambil'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -24,7 +24,7 @@ cekx:-
     B is 1,
     write('+10 normal attack'),
     write('TAPIIII -15 health'),
-    ambilorno,!.
+    write('ambil or skip?'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -32,7 +32,7 @@ cekx:-
     X is 3,
     Y is 4,
     B is 0,
-    write('gada bray kan td udh diambil'),!.
+    write('gada bray kan td udh diambil'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -43,7 +43,7 @@ cekx:-
     write('+5 normal attack'),
     write('+5 skill')
     write('TAPIIII -10 health'),
-    ambilorno,!.
+    write('ambil or skip?'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -51,7 +51,7 @@ cekx:-
     X is 3,
     Y is 5,
     B is 0,
-    write('gada bray kan td udh diambil'),!.
+    write('gada bray kan td udh diambil'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -62,7 +62,7 @@ cekx:-
     write('+10 health')
     write('+15 normal attack'),
     write('TAPIIII -15 skill'),
-    ambilorno,!.
+    write('ambil or skip?'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -70,7 +70,7 @@ cekx:-
     X is 3,
     Y is 1,
     B is 0,
-    write('gada bray kan td udh diambil'),!.
+    write('gada bray kan td udh diambil'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -81,7 +81,7 @@ cekx:-
     write('+5 skill'),
     write('+5 health'),
     write('TAPIIII -5 normal attack'),
-    ambilorno,!.
+    write('ambil or skip?'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -89,7 +89,7 @@ cekx:-
     X is 4,
     Y is 3,
     B is 0,
-    write('gada bray kan td udh diambil'),!.
+    write('gada bray kan td udh diambil'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -100,9 +100,9 @@ cekx:-
     write('+5 skill'),
     write('+10 normal attack'),
     write('TAPIIII -20 health'),
-    ambilorno,!.
+    write('ambil or skip?'),nl ,!.
 
-ambilx:-
+ambil:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 3,
@@ -126,9 +126,9 @@ ambilx:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack').
+    write('hore u just gain more normal attack'),nl ,!.
 
-ambilx:-
+ambil:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 3,
@@ -157,9 +157,9 @@ ambilx:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and skill'),!.
+    write('hore u just gain more normal attack and skill'),nl ,!.
 
-ambilx:-
+ambil:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 3,
@@ -188,9 +188,9 @@ ambilx:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and health'),!.
+    write('hore u just gain more normal attack and health'),nl ,!.
 
-ambilx:-
+ambil:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 3,
@@ -219,9 +219,9 @@ ambilx:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more health and skill'),!.
+    write('hore u just gain more health and skill'),nl ,!.
 
-ambilx:-
+ambil:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 4,
@@ -250,16 +250,4 @@ ambilx:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and skill'),!.
-
-ambilorno:-
-    write('ambil or skip?'),
-    read(X),
-    X = 'ambil',
-    ambilx,!.
-
-ambilorno:-
-    write('ambil or skip?'),
-    read(X),
-    X = 'no',
-    write('ok silahkan lanjut'),!.
+    write('hore u just gain more normal attack and skill'),nl ,!.
