@@ -1,3 +1,8 @@
+:-include('map_move.pl').
+
+:- dynamic(game_running/1).
+game_running(0).
+
 start :-
 	nl,nl,nl,
 	write('Welcome To The Tokemon World : Battle Squad'),nl,nl,nl,
@@ -14,21 +19,25 @@ start :-
 	write('     start. -- Start game'),nl,
 	write('     help. -- Show all available commands'),nl,
 	write('     quit. -- Quit Game'),nl,
-	write('     n. s. e. w. -- Move Player Position'),nl,
+	write('     up. down. left. right. -- Move Player Position'),nl,
 	write('     map. -- Open Map'),nl,
-	write('     heal. -- Heal your Tokemon(Available only in Gym Center)'),nl,
+	write('     heal. -- Heal your Tokemon (Available only in Gym Center)'),nl,
 	write('     status. -- Show player status'),nl,
 	write('     save(Filename). -- Save Game'),nl,
 	write('     load(Filename). -- Load Game'),nl,nl,nl,
 	write('Legends: '),nl,
 	write('     X = Treasure / Gate '),nl,
 	write('     P = Player '),nl,
-	write('     G = Gym Center '),nl.
-
+	write('     G = Gym Center '),nl,
+	retract(game_running(0)),
+	assert(game_running(1)),
+	restartplayer,
+	restarttokemonbattle,
+	assert(battletokemon(none)).
 
 help :-
 	/* If the game has not started yet */
-	game_running(false),
+	game_running(0),
 	write('Please start the game first before using this command.'),nl,nl,!.
 
 help :- 
@@ -39,9 +48,9 @@ help :-
 	write('     start. -- Start game'),nl,
 	write('     help. -- Show all available commands'),nl,
 	write('     quit. -- Quit Game'),nl,
-	write('     n. s. e. w. -- Move Player Position'),nl,
+	write('     up. down. left. right. -- Move Player Position'),nl,
 	write('     map. -- Open Map'),nl,
-	write('     heal. -- Heal your Tokemon(Available only in Gym Center)'),nl,
+	write('     heal. -- Heal your Tokemon (Available only in Gym Center)'),nl,
 	write('     status. -- Show player status'),nl,
 	write('     save(Filename). -- Save Game'),nl,
 	write('     load(Filename). -- Load Game'),nl,nl,nl,
@@ -49,3 +58,37 @@ help :-
 	write('     X = Treasure / Gate '),nl,
 	write('     P = Player '),nl,
 	write('     G = Gym Center '),nl.
+
+map :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
+
+map :-
+	/* If the game has not started yet */
+	game_running(1),
+	showmap.
+
+
+restartplayer:-
+	playerloc(X, Y),
+	X is 1,
+	Y =\= 10,
+	retract(playerloc(X,Y)).
+restartplayer:-
+	playerloc(X, Y),
+	X =\= 1,
+	Y is 10,
+	retract(playerloc(X,Y)).
+restartplayer:-
+	playerloc(X, Y),
+	X =\= 1,
+	Y =\= 10,
+	retract(playerloc(X,Y)).
+restartplayer:-
+	playerloc(X, Y),
+	X is 1,
+	Y is 10.
+
+restarttokemonbattle:-
+	battletokemon(X), retract(battletokemon(X)).

@@ -1,5 +1,5 @@
 :- debug.
-:- include(tokemon).
+:- include('tokemon.pl').
 
 % some dynamic variables
 :- dynamic(player_tokemon_list/1). player_tokemon_list([]).

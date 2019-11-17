@@ -1,4 +1,4 @@
-di game ini ada 10 tokemon yang bernama:
+di game ini ada 12 tokemon yang bernama:
 nandamon
 ayyubmon
 ciscomon
@@ -9,7 +9,10 @@ edomon
 gillmon
 ojanmon
 rakamon
-dan ada 2 legendary tokemon yang bernama :
+liamon
+ryanmon
+
+dan ada 3 legendary tokemon yang bernama :
 harlilimon
 infallmon
 judhimon

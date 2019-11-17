@@ -4,7 +4,11 @@
 
 % variabel pemain
 :- dynamic(playerloc/2).
-playerloc(1, 1).
+playerloc(1, 10).
+
+% variabel tokemon yang lagi battle
+:- dynamic(battletokemon/1).
+battletokemon(none).
 
 % here(Prop, Row, Col).
 here('G', 5, 5).
@@ -28,7 +32,7 @@ showmap_plain(Row, Col):- Row > 1, Row1 is Row-1, showmap_plain(Row1, Col), writ
 
 showmap:- showmap_plain(10, 10), printtepi(10).
 
-kiri:- 
+left:- 
 	/* command to move left : fail condition */
 
 	playerloc(X, Y),
@@ -36,7 +40,7 @@ kiri:-
 	New is 11,
 	write('Wadigidaw udah mentok nih gan!'), nl, !.
 
-kiri:- 
+left:- 
 	/* command to move left : treasure */
 
 	playerloc(X, Y),
@@ -44,7 +48,17 @@ kiri:-
 	here('x', X, New),
 	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
 
-kiri:- 
+left:- 
+	/* command to move left, start battle */
+	
+	playerloc(X, Y),
+	New is Y + 1,
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+    write('Kamu bergerak ke kiri yey'), nl, 
+	ketemutokemon, !.
+
+left:- 
 	/* command to move left */
 	
 	playerloc(X, Y),
@@ -53,24 +67,34 @@ kiri:-
 	assert(playerloc(X,New)),
     write('Kamu bergerak ke kiri yey'), nl, !.
 
-atas:- 
-	/* command to move left : fail condition */
+up:- 
+	/* command to move up : fail condition */
 
 	playerloc(X, Y),
 	New is X - 1,
 	New is 0,
 	write('Wadigidaw udah mentok nih gan!'), nl, !.
 
-atas:- 
-	/* command to move left : treasure */
+up:- 
+	/* command to move up : treasure */
 
 	playerloc(X, Y),
 	New is X - 1,
 	here('x', New, Y),
 	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
 
-atas:- 
-	/* command to move left */
+up:- 
+	/* command to move up, start battle */
+	
+	playerloc(X, Y),
+	New is X - 1,
+	retract(playerloc(X,Y)),
+	assert(playerloc(New,Y)),
+    write('Kamu bergerak ke atas yey'), nl, 
+	ketemutokemon, !.
+
+up:- 
+	/* command to move up */
 	
 	playerloc(X, Y),
 	New is X - 1,
@@ -78,24 +102,34 @@ atas:-
 	assert(playerloc(New,Y)),
     write('Kamu bergerak ke atas yey'), nl, !.
 
-kanan:- 
-	/* command to move left : fail condition */
+right:- 
+	/* command to move down : fail condition */
 
 	playerloc(X, Y),
 	New is Y - 1,
 	New is 0,
 	write('Wadigidaw udah mentok nih gan!'), nl, !.
 
-kanan:- 
-	/* command to move left : treasure */
+right:- 
+	/* command to move down : treasure */
 
 	playerloc(X, Y),
 	New is Y - 1,
 	here('x', X, New),
 	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
 
-kanan:- 
-	/* command to move left */
+right:- 
+	/* command to move right, start battle */
+	
+	playerloc(X, Y),
+	New is Y - 1,
+	retract(playerloc(X,Y)),
+	assert(playerloc(X,New)),
+    write('Kamu bergerak ke kanan yey'), nl, 
+	ketemutokemon, !.
+
+right:- 
+	/* command to move right */
 	
 	playerloc(X, Y),
 	New is Y - 1,
@@ -103,24 +137,34 @@ kanan:-
 	assert(playerloc(X,New)),
     write('Kamu bergerak ke kanan yey'), nl, !.
 
-bawah:- 
-	/* command to move left : fail condition */
+down:- 
+	/* command to move down : fail condition */
 
 	playerloc(X, Y),
 	New is X + 1,
 	New is 11,
 	write('Wadigidaw udah mentok nih gan!'), nl, !.
 
-bawah:- 
-	/* command to move left : treasure */
+down:- 
+	/* command to move down : treasure */
 
 	playerloc(X, Y),
 	New is X + 1,
 	here('x', New, Y),
 	write('Wah ada treasure nih, ambil gak ya?'), nl, !.
 
-bawah:- 
-	/* command to move left */
+down:- 
+	/* command to move down */
+	
+	playerloc(X, Y),
+	New is X + 1,
+	retract(playerloc(X,Y)),
+	assert(playerloc(New,Y)),
+    write('Kamu bergerak ke bawah yey'), nl, 
+	ketemutokemon, !.
+
+down:- 
+	/* command to move down */
 	
 	playerloc(X, Y),
 	New is X + 1,
@@ -129,7 +173,11 @@ bawah:-
     write('Kamu bergerak ke bawah yey'), nl, !.
 
 ketemutokemon:-
-	random_between(1, 100, N),
+	random_between(1, 10, N),
 	tokemon(N, A),
+	battletokemon(X),
+	retract(battletokemon(X)),
+	assert(battletokemon(A)),
 	write('Ada tokemon '), write(A), write('!'), nl,
 	write('Battle/run?'), nl, !.
+
