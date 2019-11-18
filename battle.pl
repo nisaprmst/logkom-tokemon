@@ -230,6 +230,20 @@ show_battle_status:-
     format("~p~n", [PBT]),
     format("Type : ~p~n", [PBTT]),
     format("Health : ~p~n", [PTH]), nl,
+
+    /* shows enhancement */
+    picked_tokemon_enhancment(PTE),
+
+    get_item_num(PTE, 1, 1, OLD_NA_MODIF),
+	get_item_num(PTE, 2, 1, OLD_SKILL_MODIF),
+	get_item_num(PTE, 3, 1, OLD_HEALTH_MODIF),
+	get_item_num(PTE, 4, 1, OLD_EXP),
+    get_item_num(PTE, 5, 1, OLD_LEVEL),
+
+    format("Attack modifier : ~p~n", [OLD_NA_MODIF]), nl,
+    format("Skill modifier : ~p~n", [OLD_SKILL_MODIF]), nl,
+    /* ENDDD */
+
     write("You own these Tokemons : "),
     list_writer(PTL), nl, nl.
 
@@ -246,14 +260,28 @@ show_battle_status:-
     format("Health : ~p~n", [OTH]),
     format("There are no other Tokemons hiding near, ready to pounce you.~n"),
 
-    write("Your Tokemon :"), nl,
+    nl, write("Your Tokemon :"), nl,
     player_tokemon_list(PTL),
     player_battle_tokemon(PBT),
     tipe(PBTT, PBT),
     picked_tokemon_health(PTH),
     format("~p~n", [PBT]),
     format("Type : ~p~n", [PBTT]),
-    format("Health : ~p~n", [PTH]),
+    format("Health : ~p~n", [PTH]), nl,
+    
+    /* shows enhancement */
+    picked_tokemon_enhancment(PTE),
+
+    get_item_num(PTE, 1, 1, OLD_NA_MODIF),
+	get_item_num(PTE, 2, 1, OLD_SKILL_MODIF),
+	get_item_num(PTE, 3, 1, OLD_HEALTH_MODIF),
+	get_item_num(PTE, 4, 1, OLD_EXP),
+    get_item_num(PTE, 5, 1, OLD_LEVEL),
+
+    format("Attack modifier : ~p~n", [OLD_NA_MODIF]), nl,
+    format("Skill modifier : ~p~n", [OLD_SKILL_MODIF]), nl,
+    /* ENDDD */
+
     write("You own these Tokemons : "),
     list_writer(PTL).
 

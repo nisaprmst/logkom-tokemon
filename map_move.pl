@@ -226,16 +226,18 @@ down:-
 
 ketemutokemon:-
 	random_between(1, 30, N),
-	N > 25, !,
+	N > 26, !,
 	legend_tokemon_list(LTL),
 	list_count(LTL, LTL_LEN),
 	random_between(1, LTL_LEN, LegToke_to_encounter),
+	get_item_num(LTL, LegToke_to_encounter, 1, KAKI_TOKEK),
 	battletokemon(X),
 	retract(battletokemon(X)),
-	assert(battletokemon(LegToke_to_encounter)),
+	assert(battletokemon(KAKI_TOKEK)),
 	retract(game_state(_)),
-    assertz(game_state(encounter)),
-	encounter_tokemon(LegToke_to_encounter, []).
+	assertz(game_state(encounter)),
+	write("The sky trembled as you encountered a mighty legendary Tokemon..."), nl,
+	encounter_tokemon(KAKI_TOKEK, []).
 	/* write('Ada tokemon '), write(A), write('!'), nl,
 	write('Battle/run?'), nl, !. */
 

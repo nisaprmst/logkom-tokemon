@@ -1,5 +1,5 @@
 /*Inventory*/
-:- include("tokemon.pl"). 
+%:- include("tokemon.pl").
 :- include("dynamics.pl").
 
 
