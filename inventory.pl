@@ -63,8 +63,8 @@ add_to_inventory(TOKEMON) :-
 	player_tokemon_health_list(PTHL),
 	player_tokemon_enhancemnt_list(PTEL),
 	append(PTL, [TOKEMON], NEO_PTL),
-	write("NEO PTL : "),
-	list_writer(NEO_PTL),
+	%write("NEO PTL : "),
+	%list_writer(NEO_PTL),
 	retract(player_tokemon_list(_)),
 	assertz(player_tokemon_list(NEO_PTL)),
 	health(TKHEL, TOKEMON),
@@ -82,8 +82,8 @@ add_to_inventory(TOKEMON) :-
 	player_tokemon_health_list(PTHL),
 	player_tokemon_enhancemnt_list(PTEL),
 	append(PTL, [TOKEMON], NEO_PTL),
-	write("NEO PTL : "),
-	list_writer(NEO_PTL),
+	%write("NEO PTL : "),
+	%list_writer(NEO_PTL),
 	retract(player_tokemon_list(_)),
 	assertz(player_tokemon_list(NEO_PTL)),
 	health(TKHEL, TOKEMON),
@@ -107,3 +107,14 @@ remove_TK_num_from_inventory(TK_NUM) :-
 	del_list_num(PTEL, TK_NUM, 1, NEO_PTEL),
 	retract(player_tokemon_enhancemnt_list(_)),
 	assertz(player_tokemon_enhancemnt_list(NEO_PTEL)).
+
+change_modifier(TK_NUM, NA_MODIF, SKILL_MODIF, HEALTH_MODIF, EXP, LEVEL):-
+	player_tokemon_enhancemnt_list(PTEL),
+	get_item_num(PTEL, TK_NUM, 1, TK_ENHANCE),
+	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
+	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
+	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
+	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
+	replace(1, 1, NA_MODIF, PTEL, PTEL_1).
+	
+	%PTEL[na modif, skill modif, health, exp, level]

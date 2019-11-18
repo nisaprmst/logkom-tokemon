@@ -244,7 +244,7 @@ player_attack:-
     player_battle_tokemon(PBT),
     opposing_tokemon(OT),
     na(PBT, PNA),
-    format("PNA    : ~p~n", [PNA]),
+    %format("PNA    : ~p~n", [PNA]),
     %insert enhancment modifier getter here pls
 
     get_type_modifier(PBT, OT, Type_Mod),
@@ -262,7 +262,7 @@ player_attack:-
     check_enemy.
 
 player_skill:-
-    write("SKILLL"),
+    %write("SKILLL"),
     picked_tokemon_used_skill(PTSS),
     PTSS == 0,
     player_battle_tokemon(PBT),
@@ -289,13 +289,13 @@ player_skill:-
     check_enemy, !.
 
 check_enemy:-
-    write("CHECK ENEMY TWOOOO!!!"), nl,
+    %write("CHECK ENEMY TWOOOO!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health =< 0, !,
     kill_enemy.
 
 check_enemy:-
-    write("CHECK ENEMY ONE!!!"), nl,
+    %write("CHECK ENEMY ONE!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health > 0, !,
     random_between(0, 11, Rando),!,
@@ -328,7 +328,7 @@ enemy_attack:-
     player_battle_tokemon(PBT),
     opposing_tokemon(OT),
     na(OT, OTNA),
-    format("OTNA    : ~p~n", [OTNA]),
+    %format("OTNA    : ~p~n", [OTNA]),
     %insert enhancment modifier getter here pls
 
     get_type_modifier(OT, PBT, Type_Mod),
@@ -386,6 +386,7 @@ kill_enemy:-
     legendary_check.
 
 kill_enemy:-
+    % Killed a legendary tokemon with hiders
     enemy_waiting_list(EWL),
     EWL \= [],
     [Next_Foekemon|_] is EWL,

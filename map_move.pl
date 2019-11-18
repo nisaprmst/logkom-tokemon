@@ -17,14 +17,14 @@ battletokemon(none).
 has_healed(none).
 
 % here(Prop, Row, Col).
-here('G', 5, 5).
-here('x', 3, 3).
-here('x', 3, 4).
-here('x', 3, 5).
-here('x', 3, 1).
-here('x', 4, 3).
-here('P', Row, Col):- playerloc(R, C), R is Row, C is Col.
-here('-', Row, Col):- here(_, R, C), Row =\= R, Col =\= C.
+here(g, 5, 5).
+here(x, 3, 3).
+here(x, 3, 4).
+here(x, 3, 5).
+here(x, 3, 1).
+here(x, 4, 3).
+here(p, Row, Col):- playerloc(R, C), R is Row, C is Col.
+here(-, Row, Col):- here(_, R, C), Row \= R, Col \= C.
 
 
 printtepi(1):- write("xxxxx"), nl.
@@ -198,25 +198,13 @@ ketemutokemon:-
 	/* write('Ada tokemon '), write(A), write('!'), nl,
 	write('Battle/run?'), nl, !. */
 
-
-heal:- 
-	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == '-',
-	write("You must be at the Tokemon Gym to heal."), nl.
-
-heal:- 
-	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'x',
-	write("You must be at the Tokemon Gym to heal."), nl.
-
 heal:-
 	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'G',
+	PX == 5, PY ==5,
+	%here(MAP_OBJECT, PX, PY),
+	%MAP_OBJECT == g,
 	has_healed(Heal_Bool),
-	Heal_Bool == none,
+	Heal_Bool == none, !,
 	write("You stepped inside the Tokemon Gym in the middle of nowhere."), nl,
 	write("It was derelict, but you found some useful supplies to heal your Tokemons."), nl,
 	write("You quickly healed your Tokemons and left the Gym post-haste."), nl,
@@ -226,12 +214,12 @@ heal:-
 	retract(has_healed(_)),
 	assertz(has_healed(yes)).
 
-
 heal:-
 	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'G',
+	PX \= 5, PY \=5,
+	write("You must be at the Tokemon Gym to heal."), nl.
+
+heal:-
 	has_healed(Heal_Bool),
 	Heal_Bool \= none,
-	write("The Gym has collapsed."), nl,
-	write("You cannot heal anything within it any longer."), nl.
+	write("The Tokemon Gym has collapsed, you cannot heal within it any longer."), nl.
