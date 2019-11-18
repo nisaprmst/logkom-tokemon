@@ -97,14 +97,13 @@ left:-
 
 left:- 
 	/* command to move left, start battle */
-	ketemutokemon,
+	ketemutokemon, !,
 	playerloc(X, Y),
 	New is Y + 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
     write('You have succeed to move left!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
-	ketemutokemon, !.
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl.
 
 left:- 
 	/* command to move left */
@@ -135,13 +134,12 @@ up:-
 
 up:- 
 	/* command to move up, start battle */
-	ketemutokemon,
+	ketemutokemon, !,
 	playerloc(X, Y),
 	New is X - 1,
 	assert(playerloc(New,Y)),
     write('You have succeed to move up!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
-	ketemutokemon, !.
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl.
 
 up:- 
 	/* command to move up */
@@ -172,14 +170,13 @@ right:-
 
 right:- 
 	/* command to move right, start battle */
-	ketemutokemon,
+	ketemutokemon, !,
 	playerloc(X, Y),
 	New is Y - 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
     write('You have succeed to move right!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
-	ketemutokemon, !.
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl.
 
 right:- 
 	/* command to move right */
@@ -210,14 +207,13 @@ down:-
 
 down:- 
 	/* command to move down */
-	ketemutokemon,
+	ketemutokemon, !,
 	playerloc(X, Y),
 	New is X + 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
     write('You have succeed to move down!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
-	ketemutokemon, !.
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl.
 
 down:- 
 	/* command to move down */
