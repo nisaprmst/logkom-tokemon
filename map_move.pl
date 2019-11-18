@@ -38,6 +38,24 @@ showmap_plain(Row, Col):- Row > 1, Row1 is Row-1, showmap_plain(Row1, Col), writ
 
 showmap:- showmap_plain(10, 10), printtepi(10).
 
+left :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
+right :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
+down :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
+up :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
+
+
 left:- 
 	/* command to move left : fail condition */
 
