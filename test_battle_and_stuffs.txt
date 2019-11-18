@@ -5,5 +5,8 @@ add_to_inventory(nandamon), add_to_inventory(dagomon).
 player_tokemon_list(PTL), player_tokemon_health_list(PTHL), player_tokemon_enhancemnt_list(PTEL).
 
 encounter_tokemon(ciscomon, []).
+encounter_tokemon(harlilimon, []).
+encounter_tokemon(infallmon, []).
+encounter_tokemon(judhimon, []).
 
 retract(playerloc(_, _)), assertz(playerloc(5, 5)).

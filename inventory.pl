@@ -46,13 +46,13 @@ replace(N, I, R, [_|T], [R|T2]) :- I == N, replace(N, 999, R, T, T2).
 replace(N, I, R, [H|T], [H|T2]) :- I \= N, J is I + 1, replace(N, J, R, T, T2).
 
 schTK_num([], _, N) :- N is -96,!.
-	%Searches tokemon number in inventory, not found, returns negatives.
+	%Searches tokemon number in list, not found, returns negatives.
 
 schTK_num([A|_], C, N) :- A == C, N is 1,!.
-	%Searches tokemon number in inventory, found, returns.
+	%Searches tokemon number in list, found, returns.
 
 schTK_num([_|B], C, N) :- schTK_num(B, C, M), N is M + 1.
-	%Searches tokemon number in inventory, not found, continues searching.
+	%Searches tokemon number in list, not found, continues searching.
 
 list_writer([]) :- !.
 list_writer([A|B]) :- format("~p, ", [A]), list_writer(B).
@@ -71,7 +71,8 @@ add_to_inventory(TOKEMON) :-
 	append(PTHL, [TKHEL], NEO_PTHL),
 	retract(player_tokemon_health_list(_)),
 	assertz(player_tokemon_health_list(NEO_PTHL)),
-	append(PTEL, [], NEO_PTEL),
+	append(PTEL, [0, 0, 0, 0, 0], NEO_PTEL),
+	%PTEL[na modif, skill modif, health, exp, level]
 	retract(player_tokemon_enhancemnt_list(_)),
 	assertz(player_tokemon_enhancemnt_list(NEO_PTEL)).
 
