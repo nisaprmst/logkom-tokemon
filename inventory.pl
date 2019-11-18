@@ -182,9 +182,41 @@ remove_TK_num_from_inventory(TK_NUM) :-
 	assertz(player_tokemon_health_list(NEO_PTHL)),
 	del_list_num(PTEL, TK_NUM, 1, NEO_PTEL),
 	retract(player_tokemon_enhancemnt_list(_)),
-	assertz(player_tokemon_enhancemnt_list(NEO_PTEL)).
+	assertz(player_tokemon_enhancemnt_list(NEO_PTEL)),
+
+	player_tokemon_na_mod_list(NA_MODL),
+	player_tokemon_skill_mod_list(SKILL_MODL),
+	player_tokemon_hp_mod_list(HP_MODL),
+	player_tokemon_exp_list(EXP_MODL),
+	player_tokemon_level_list(LVL_MODL),
+
+	del_list_num(NA_MODL, TK_NUM, 1, NEO_NA_MODL),
+	del_list_num(SKILL_MODL, TK_NUM, 1, NEO_SKILL_MODL),
+	del_list_num(HP_MODL, TK_NUM, 1, NEO_HP_MODL),
+	del_list_num(EXP_MODL, TK_NUM, 1, NEO_EXP_MODL),
+	del_list_num(LVL_MODL, TK_NUM, 1, NEO_LVL_MODL),
+
+	retract(player_tokemon_na_mod_list(_)),
+	assertz(player_tokemon_na_mod_list(NEO_NA_MODL)),
+
+	
+	retract(player_tokemon_skill_mod_list(_)),
+	assertz(player_tokemon_skill_mod_list(NEO_SKILL_MODL)),
+
+	
+	retract(player_tokemon_hp_mod_list(_)),
+	assertz(player_tokemon_hp_mod_list(NEO_HP_MODL)),
+
+	
+	retract(player_tokemon_exp_list(_)),
+	assertz(player_tokemon_exp_list(NEO_EXP_MODL)),
+
+	
+	retract(player_tokemon_level_list(_)),
+	assertz(player_tokemon_level_list(NEO_LVL_MODL)).
 
 change_modifier(TK_NUM, NA_MODIF, SKILL_MODIF, HEALTH_MODIF, EXP, LEVEL):-
+	%PTEL[na modif, skill modif, health, exp, level]
 	player_tokemon_na_mod_list(NA_MODL),
 	player_tokemon_skill_mod_list(SKILL_MODL),
 	player_tokemon_hp_mod_list(HP_MODL),

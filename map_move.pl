@@ -93,7 +93,7 @@ left:-
 	here('x', X, New),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, !.
+	cek_tres(X, New), !.
 
 left:- 
 	/* command to move left, start battle */
@@ -130,7 +130,7 @@ up:-
 	here('x', New, Y),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, !.
+	cek_tres(New, Y), !.
 
 up:- 
 	/* command to move up, start battle */
@@ -166,7 +166,7 @@ right:-
 	here('x', X, New),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, !.
+	cek_tres(X, New), !.
 
 right:- 
 	/* command to move right, start battle */
@@ -203,7 +203,7 @@ down:-
 	here('x', New, Y),
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-	cekx, !.
+	cek_tres(New, Y), !.
 
 down:- 
 	/* command to move down */
@@ -226,15 +226,28 @@ down:-
 
 ketemutokemon:-
 	random_between(1, 30, N),
+	N > 25, !,
+	legend_tokemon_list(LTL),
+	list_count(LTL, LTL_LEN),
+	random_between(1, LTL_LEN, LegToke_to_encounter),
+	battletokemon(X),
+	retract(battletokemon(X)),
+	assert(battletokemon(LegToke_to_encounter)),
+	retract(game_state(_)),
+    assertz(game_state(encounter)),
+	encounter_tokemon(LegToke_to_encounter, []).
+	/* write('Ada tokemon '), write(A), write('!'), nl,
+	write('Battle/run?'), nl, !. */
+
+ketemutokemon:-
+	random_between(1, 30, N),
 	tokemon(N, A),
 	battletokemon(X),
 	retract(battletokemon(X)),
 	assert(battletokemon(A)),
 	retract(game_state(_)),
-    assertz(game_state(encounter)),
+	assertz(game_state(encounter)),
 	encounter_tokemon(A, []).
-	/* write('Ada tokemon '), write(A), write('!'), nl,
-	write('Battle/run?'), nl, !. */
 
 heal:-
 	playerloc(PX, PY),

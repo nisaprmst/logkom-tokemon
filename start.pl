@@ -100,8 +100,8 @@ help :-
 	write('     map. -- Open Map'),nl,
 	write('     heal. -- Heal your Tokemon (Available only in Gym Center)'),nl,
 	write('     status. -- Show player status'),nl,
-	write('     save(Filename). -- Save Game'),nl,
-	write('     load(Filename). -- Load Game'),nl,nl,nl,
+	%write('     save(Filename). -- Save Game'),nl,
+	%write('     load(Filename). -- Load Game'),nl,nl,nl,
 	write('Legends: '),nl,
 	write('     X = Treasure / Gate '),nl,
 	write('     P = Player '),nl,
@@ -168,3 +168,8 @@ restart_legend_tokemon:-
 	append(Lgd_tkmn_2, [judhimon], Lgd_tkmn_3),
 	assertz(legend_tokemon_list(Lgd_tkmn_3)).
 	
+quit:-
+	halt.
+
+exit:-
+	halt.

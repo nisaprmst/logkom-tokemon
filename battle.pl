@@ -354,10 +354,10 @@ player_skill:-
     assertz(opposing_tokemon_health(Neo_o_hl)),
     retract(picked_tokemon_used_skill(_)),
     assertz(picked_tokemon_used_skill(1)),
-    format("~p reached deep within and unleashed its skill to deal ~p damage!~n", [PBT, DMG]), sleep(1),
+    format("~p reached deep within and unleashed its skill to deal ~p damage!~n", [PBT, DMG]),sleep(1),
     show_battle_status,
-    sleep(1), !,
-    check_enemy, !.
+    sleep(1),!,
+    check_enemy.
 
 check_enemy:-
     write("CHECK ENEMY TWOOOO!!!"), nl,
@@ -368,7 +368,7 @@ check_enemy:-
 check_enemy:-
     write("CHECK ENEMY ONE!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
-    Enemy_Health > 0, !,
+    %Enemy_Health > 0, !,
     random_between(0, 11, Rando),
     %format("Rando    : ~p~n", [Rando]),
     %write("RANDOMISASI"), nl,
@@ -393,9 +393,9 @@ check_enemy_skill(Random_Number):-
     assertz(opposing_tokemon_used_skill(1)).
 
 check_enemy_skill(Random_Number):-
-    write("Check enemy skill TWO!!!"), nl,
-    Random_Number =< 8, !,
-    enemy_attack, !.
+    write("Check enemy skill TWO!!!"), nl, !,
+    %Random_Number =< 8, !,
+    enemy_attack.
 
 enemy_attack:-
     player_battle_tokemon(PBT),
