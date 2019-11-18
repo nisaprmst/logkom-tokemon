@@ -412,8 +412,8 @@ check_player_battle_tokemon :-
 check_player_battle_tokemon :- !.
 
 check_enemy_skill(Random_Number):-
-    write("Check enemy skill ONE!!!"), nl,
-    Random_Number > 8, !,
+    %write("Check enemy skill ONE!!!"), nl,
+    Random_Number > 8,
     opposing_tokemon_used_skill(OTSS),
     OTSS == 0,
     enemy_skill, !,
@@ -421,7 +421,7 @@ check_enemy_skill(Random_Number):-
     assertz(opposing_tokemon_used_skill(1)).
 
 check_enemy_skill(Random_Number):-
-    write("Check enemy skill TWO!!!"), nl, !,
+    %write("Check enemy skill TWO!!!"), nl, !,
     %Random_Number =< 8, !,
     enemy_attack.
 
