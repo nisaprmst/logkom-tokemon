@@ -110,11 +110,35 @@ remove_TK_num_from_inventory(TK_NUM) :-
 
 change_modifier(TK_NUM, NA_MODIF, SKILL_MODIF, HEALTH_MODIF, EXP, LEVEL):-
 	player_tokemon_enhancemnt_list(PTEL),
+	format("TK_NUM IS ~p~n", [TK_NUM]),
+
 	get_item_num(PTEL, TK_NUM, 1, TK_ENHANCE),
-	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
-	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
-	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
-	replace(1, 1, NA_MODIF, PTEL, PTEL_1),
-	replace(1, 1, NA_MODIF, PTEL, PTEL_1).
+	/*get_item_num(TK_ENHANCE, TK_NUM, 1, OLD_NA_MODIF),
+	get_item_num(TK_ENHANCE, TK_NUM, 1, OLD_SKILL_MODIF),
+	get_item_num(TK_ENHANCE, TK_NUM, 1, OLD_HEALTH_MODIF),
+	get_item_num(TK_ENHANCE, TK_NUM, 1, OLD_EXP),
+	get_item_num(TK_ENHANCE, TK_NUM, 1, OLD_LEVEL),*/
+
+	[OLD_NA_MODIF|B] = TK_ENHANCE,
+	OLD_SKILL_MODIF
+	OLD_HEALTH_MODIF
+	OLD_EXP
+	OLD_LEVEL
+
+	NEO_NA_MODIF = OLD_NA_MODIF + NA_MODIF,
+	NEO_SKILL_MODIF = OLD_SKILL_MODIF + SKILL_MODIF,
+	NEO_HEALTH_MODIF = OLD_HEALTH_MODIF + HEALTH_MODIF,
+	NEO_EXP = OLD_EXP + EXP,
+	NEO_LEVEL = OLD_LEVEL + LEVEL,
+
+	replace(1, 1, NEO_NA_MODIF, TK_ENHANCE, TK_ENHANCE_1),
+	replace(2, 1, NEO_SKILL_MODIF, TK_ENHANCE_1, TK_ENHANCE_2),
+	replace(3, 1, NEO_HEALTH_MODIF, TK_ENHANCE_2, TK_ENHANCE_3),
+	replace(4, 1, NEO_EXP, TK_ENHANCE_3, TK_ENHANCE_4),
+	replace(5, 1, NEO_LEVEL, TK_ENHANCE_4, TK_ENHANCE_5),
+	
+	replace(TK_NUM, 1, TK_ENHANCE_5, PTEL, PTEL_NEO),
+	retract(player_tokemon_enhancemnt_list(_)),
+	assertz(player_tokemon_enhancemnt_list(PTEL_NEO)).
 	
 	%PTEL[na modif, skill modif, health, exp, level]
