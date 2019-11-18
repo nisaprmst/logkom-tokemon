@@ -1,6 +1,7 @@
-:- include('tokemon.pl').
+/*
 :- include('map_move.pl').
 :- include('battle.pl').
+:- include('tokemon.pl'). */
 
 treasure(3,3,1).
 treasure(3,4,1).
@@ -41,7 +42,7 @@ cekx:-
     Y is 4,
     B is 1,
     write('+5 normal attack'),
-    write('+5 skill')
+    write('+5 skill'),
     write('TAPIIII -10 health'),
     write('ambil or skip?'),nl ,!.
 
@@ -59,7 +60,7 @@ cekx:-
     X is 3,
     Y is 5,
     B is 1,
-    write('+10 health')
+    write('+10 health'),
     write('+15 normal attack'),
     write('TAPIIII -15 skill'),
     write('ambil or skip?'),nl ,!.

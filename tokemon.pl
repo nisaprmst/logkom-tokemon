@@ -1,3 +1,20 @@
+:- discontiguous legendtokemon/2.
+:- discontiguous tokemon/2.
+:- discontiguous health/2.
+:- discontiguous tipe/2.
+:- discontiguous na/2.
+:- discontiguous skill/2.
+:- discontiguous lawan/2.
+
+:- multifile(legendtokemon/2).
+:- multifile(tokemon/2).
+:- multifile(health/2).
+:- multifile(tipe/2).
+:- multifile(na/2).
+:- multifile(skill/2).
+:- multifile(lawan/2).
+
+
 /* NAMA TOKEMON */
 tokemon(1, nandamon).
 health(100,nandamon).

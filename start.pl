@@ -1,4 +1,9 @@
 :-include('map_move.pl').
+%:-include('battle.pl').
+%:-include('dynamics.pl').
+%:- include('tokemon.pl').
+%:- include('inventory.pl').
+%:- include('dynamics.pl').
 
 :- dynamic(game_running/1).
 game_running(0).
@@ -33,7 +38,8 @@ start :-
 	assert(game_running(1)),
 	restartplayer,
 	restarttokemonbattle,
-	assert(battletokemon(none)).
+	assert(battletokemon(none)),
+	add_to_inventory(dagomon).
 
 help :-
 	/* If the game has not started yet */

@@ -1,5 +1,7 @@
-:- include('tokemon.pl').
+
 :- include('treasure.pl').
+:- include('tokemon.pl'). 
+:- include('battle.pl').
 
 % ukuran peta = 10 x 10
 
@@ -10,6 +12,9 @@ playerloc(1, 10).
 % variabel tokemon yang lagi battle
 :- dynamic(battletokemon/1).
 battletokemon(none).
+
+:- dynamic(has_healed/1).
+has_healed(none).
 
 % here(Prop, Row, Col).
 here('G', 5, 5).
@@ -187,6 +192,46 @@ ketemutokemon:-
 	battletokemon(X),
 	retract(battletokemon(X)),
 	assert(battletokemon(A)),
-	write('Ada tokemon '), write(A), write('!'), nl,
-	write('Battle/run?'), nl, !.
+	retract(game_state(_)),
+    assertz(game_state(encounter)),
+	encounter_tokemon(A, []).
+	/* write('Ada tokemon '), write(A), write('!'), nl,
+	write('Battle/run?'), nl, !. */
 
+
+heal:- 
+	playerloc(PX, PY),
+	here(MAP_OBJECT, PX, PY),
+	MAP_OBJECT == '-',
+	write("You must be at the Tokemon Gym to heal."), nl.
+
+heal:- 
+	playerloc(PX, PY),
+	here(MAP_OBJECT, PX, PY),
+	MAP_OBJECT == 'x',
+	write("You must be at the Tokemon Gym to heal."), nl.
+
+heal:-
+	playerloc(PX, PY),
+	here(MAP_OBJECT, PX, PY),
+	MAP_OBJECT == 'G',
+	has_healed(Heal_Bool),
+	Heal_Bool == none,
+	write("You stepped inside the Tokemon Gym in the middle of nowhere."), nl,
+	write("It was derelict, but you found some useful supplies to heal your Tokemons."), nl,
+	write("You quickly healed your Tokemons and left the Gym post-haste."), nl,
+	write("As you did, a terrible low rumbling sound was heard."), nl,
+	write("And the Gym collapsed."), nl,
+	heal_player_tokemons,
+	retract(has_healed(_)),
+	assertz(has_healed(yes)).
+
+
+heal:-
+	playerloc(PX, PY),
+	here(MAP_OBJECT, PX, PY),
+	MAP_OBJECT == 'G',
+	has_healed(Heal_Bool),
+	Heal_Bool \= none,
+	write("The Gym has collapsed."), nl,
+	write("You cannot heal anything within it any longer."), nl.
