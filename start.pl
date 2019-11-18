@@ -39,7 +39,8 @@ start :-
 	restartplayer,
 	restarttokemonbattle,
 	assert(battletokemon(none)),
-	add_to_inventory(dagomon).
+	add_to_inventory(dagomon),
+	restart_legend_tokemon.
 
 help :-
 	/* If the game has not started yet */
@@ -98,3 +99,11 @@ restartplayer:-
 
 restarttokemonbattle:-
 	battletokemon(X), retract(battletokemon(X)).
+
+restart_legend_tokemon:-
+	retract(legend_tokemon_list(_)),
+	append([], [harlilimon], Lgd_tkmn_1),
+	append(Lgd_tkmn_1, [infallmon], Lgd_tkmn_2),
+	append(Lgd_tkmn_2, [judhimon], Lgd_tkmn_3),
+	assertz(legend_tokemon_list(Lgd_tkmn_3)).
+	

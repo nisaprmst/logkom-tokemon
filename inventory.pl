@@ -89,7 +89,7 @@ add_to_inventory(TOKEMON) :-
 	append(PTHL, [TKHEL], NEO_PTHL),
 	retract(player_tokemon_health_list(_)),
 	assertz(player_tokemon_health_list(NEO_PTHL)),
-	append(PTEL, [], NEO_PTEL),
+	append(PTEL, [0, 0, 0], NEO_PTEL),
 	retract(player_tokemon_enhancemnt_list(_)),
 	assertz(player_tokemon_enhancemnt_list(NEO_PTEL)).
 

@@ -1,4 +1,9 @@
 /* dynamics */
+
+
+:- include('status.pl').
+
+
 % some dynamic variables
 :- dynamic(game_state/1). game_state(battle).
 
@@ -23,7 +28,7 @@
 :- dynamic(enemy_waiting_list/1). enemy_waiting_list([]).
 :- dynamic(capturable/1). capturable(none).
 
-
+:- dynamic(legend_tokemon_list/1). legend_tokemon_list([]).
 
 %player_inventory(Tokemon_List, Tokemon_Health_List, Tokemon_Enhancement_List)
 
@@ -48,3 +53,22 @@
 
 :- multifile(enemy_waiting_list/1).
 :- multifile(capturable/1).
+
+:- multifile(legend_tokemon_list/1).
+
+
+
+status:-
+	write("+====================+"), nl,
+	write('|       STATUS       |'), nl,
+	write("+====================+"), nl,
+
+	write('+====Your Tokemon====+'), nl,
+	%write_tokemon_list(inventory), nl,
+	player_tokemon_list(PTL),
+	player_tokemon_health_list(PTHL),
+	player_tokemon_enhancemnt_list(PTEL),
+	write_inventory(PTL, PTHL, PTEL),
+	write('+=Roaming Legendaries=+'), nl,
+	legend_tokemon_list(RLL),
+	write_tokemon_list(RLL), nl.

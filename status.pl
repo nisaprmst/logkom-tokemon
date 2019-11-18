@@ -1,15 +1,5 @@
-:- include(tokemon).
-status:-
-	write("+====================+"), nl,
-	write('|       STATUS       |'), nl,
-	write("+====================+"), nl,
-
-	write('+====Your Tokemon====+'), nl,
-	write_tokemon_list(inventory), nl,
-	write('+=Roaming Legendaries=+'), nl,
-	write_tokemon_list(roaming_legend_list), nl.
-
-
+:- include('tokemon.pl').
+%:- include('dynamics.pl').
 
 /* Tokemon List writers */
 
@@ -34,4 +24,25 @@ write_tokemon_info(Tokemon):-
 	format("~p~n", [Tokemon]),
 	format("Health    : ~p~n", [HEALTH]),
 	format("Type      : ~p~n", [TYPE]), nl.
+
+
+write_inventory([], _, _) :- !.
+
+write_inventory(Tokemon_List, Tokemon_health_list, Tokemon_en_list):-
+	%player_tokemon_list(PTL),
+	[PTL_H|PTL_T] = Tokemon_List,
+	%player_tokemon_health_list(PTHL),
+	[PTHL_H|PTHL_T] = Tokemon_health_list,
+	%player_tokemon_enhancemnt_list(PTEL),
+	%[PTEL_H|PTEL_T] = Tokemon_en_list,
+	tipe(TYPE, PTL_H),
+
+	format("~p~n", [PTL_H]),
+	format("Health    : ~p~n", [PTHL_H]),
+	format("Type      : ~p~n", [TYPE]), nl,
+
+	write_inventory(PTL_T, PTHL_T, []).
+
+
+
 

@@ -5,6 +5,7 @@
 :- include('dynamics.pl'). 
 
 
+
 % These commands are exposed (used by the player in the game).
 attack:-
     player_attack.
