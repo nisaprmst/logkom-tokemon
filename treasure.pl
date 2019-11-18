@@ -15,7 +15,7 @@ cekx:-
     X is 3,
     Y is 3,
     B is 0,
-    write('There's nothing here.You have received the treasure before!'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -25,7 +25,7 @@ cekx:-
     B is 1,
     write('YOU JUST FOUND THE TREASURE!!'),nl,
     write('Do you wish to take it?'),nl,
-    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
     write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
     
 cekx:-
@@ -34,7 +34,7 @@ cekx:-
     X is 3,
     Y is 4,
     B is 0,
-    write('There's nothing here.You have received the treasure before!'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -44,7 +44,7 @@ cekx:-
     B is 1,
     write('YOU JUST FOUND THE TREASURE!!'),nl,
     write('Do you wish to take it?'),nl,
-    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
     write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
@@ -53,7 +53,7 @@ cekx:-
     X is 3,
     Y is 5,
     B is 0,
-    write('There's nothing here.You have received the treasure before!'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -63,7 +63,7 @@ cekx:-
     B is 1,
     write('YOU JUST FOUND THE TREASURE!!'),nl,
     write('Do you wish to take it?'),nl,
-    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
     write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
@@ -72,7 +72,7 @@ cekx:-
     X is 3,
     Y is 1,
     B is 0,
-    write('There's nothing here.You have received the treasure before!'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -82,7 +82,7 @@ cekx:-
     B is 1,
     write('YOU JUST FOUND THE TREASURE!!'),nl,
     write('Do you wish to take it?'),nl,
-    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
     write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
@@ -91,7 +91,7 @@ cekx:-
     X is 4,
     Y is 3,
     B is 0,
-    write('There's nothing here.You have received the treasure before!'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -101,7 +101,7 @@ cekx:-
     B is 1,
     write('YOU JUST FOUND THE TREASURE!!'),nl,
     write('Do you wish to take it?'),nl,
-    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
     write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 ambil:-
