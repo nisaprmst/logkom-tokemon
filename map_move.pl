@@ -54,7 +54,10 @@ up :-
 	/* If the game has not started yet */
 	game_running(0),
 	write('Please start the game first before using this command.'),nl,nl,!.
-
+heal :-
+	/* If the game has not started yet */
+	game_running(0),
+	write('Please start the game first before using this command.'),nl,nl,!.
 
 left:- 
 	/* command to move left : fail condition */

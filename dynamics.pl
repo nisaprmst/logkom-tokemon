@@ -58,17 +58,3 @@
 
 
 
-status:-
-	write("+====================+"), nl,
-	write('|       STATUS       |'), nl,
-	write("+====================+"), nl,
-
-	write('+====Your Tokemon====+'), nl,
-	%write_tokemon_list(inventory), nl,
-	player_tokemon_list(PTL),
-	player_tokemon_health_list(PTHL),
-	player_tokemon_enhancemnt_list(PTEL),
-	write_inventory(PTL, PTHL, PTEL),
-	write('+=Roaming Legendaries=+'), nl,
-	legend_tokemon_list(RLL),
-	write_tokemon_list(RLL), nl.
