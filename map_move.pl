@@ -44,7 +44,7 @@ left:-
 	playerloc(X, Y),
 	New is Y + 1,
 	New is 11,
-	write('You can't move left,you are on the edge of the map!'), nl, !.
+	write('You cannot move left,you are on the edge of the map!'), nl, !.
 
 left:- 
 	/* command to move left : treasure */
@@ -62,14 +62,10 @@ left:-
 	playerloc(X, Y),
 	New is Y + 1,
 	retract(playerloc(X,Y)),
-<<<<<<< HEAD
-	assert(playerloc(X,New)), !.
-=======
 	assert(playerloc(X,New)),
-    write('You have succed to move left!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+    write('You have succeed to move left!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
 	ketemutokemon, !.
->>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 left:- 
 	/* command to move left */
@@ -86,7 +82,7 @@ up:-
 	playerloc(X, Y),
 	New is X - 1,
 	New is 0,
-	write('You can't move up,you are on the edge of the map!'), nl, !.
+	write('You cannot move up,you are on the edge of the map!'), nl, !.
 
 up:- 
 	/* command to move up : treasure */
@@ -103,15 +99,10 @@ up:-
 	ketemutokemon,
 	playerloc(X, Y),
 	New is X - 1,
-	retract(playerloc(X,Y)),
-<<<<<<< HEAD
-	assert(playerloc(New,Y)), !.
-=======
 	assert(playerloc(New,Y)),
-    write('You have succed to move up!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+    write('You have succeed to move up!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
 	ketemutokemon, !.
->>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 up:- 
 	/* command to move up */
@@ -120,7 +111,7 @@ up:-
 	New is X - 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
-    write('You have succed to move up!'), nl, !.
+    write('You have succeed to move up!'), nl, !.
 
 right:- 
 	/* command to move down : fail condition */
@@ -128,7 +119,7 @@ right:-
 	playerloc(X, Y),
 	New is Y - 1,
 	New is 0,
-	write('You can't move right,you are on the edge of the map'), nl, !.
+	write('You cannot move right,you are on the edge of the map'), nl, !.
 
 right:- 
 	/* command to move down : treasure */
@@ -146,14 +137,10 @@ right:-
 	playerloc(X, Y),
 	New is Y - 1,
 	retract(playerloc(X,Y)),
-<<<<<<< HEAD
-	assert(playerloc(X,New)), !.
-=======
 	assert(playerloc(X,New)),
-    write('You have succed to move right!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+    write('You have succeed to move right!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
 	ketemutokemon, !.
->>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 right:- 
 	/* command to move right */
@@ -162,7 +149,7 @@ right:-
 	New is Y - 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-    write('You have succed to move right!'), nl, !.
+    write('You have succeed to move right!'), nl, !.
 
 down:- 
 	/* command to move down : fail condition */
@@ -170,7 +157,7 @@ down:-
 	playerloc(X, Y),
 	New is X + 1,
 	New is 11,
-	write('You can't move down,you are on the edge of the map!'), nl, !.
+	write('You cannot move down,you are on the edge of the map!'), nl, !.
 
 down:- 
 	/* command to move down : treasure */
@@ -188,14 +175,10 @@ down:-
 	playerloc(X, Y),
 	New is X + 1,
 	retract(playerloc(X,Y)),
-<<<<<<< HEAD
-	assert(playerloc(New,Y)), !.
-=======
 	assert(playerloc(New,Y)),
-    write('You have succed to move down!'), nl, 
-    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+    write('You have succeed to move down!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CANNOT MOVE anywhere else. Take the Battle or Run !'),nl,
 	ketemutokemon, !.
->>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 down:- 
 	/* command to move down */
@@ -204,7 +187,7 @@ down:-
 	New is X + 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
-    write('You have succed to move down!'), nl, !.
+    write('You have succeed to move down!'), nl, !.
 
 ketemutokemon:-
 	random_between(1, 30, N),
