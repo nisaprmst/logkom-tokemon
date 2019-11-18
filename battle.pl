@@ -550,7 +550,10 @@ back_to_movement:-
 legendary_check:-
     legend_tokemon_list(RLL),
     RLL == [],
-    write("You have successfully defeated the legendaries."), nl,
-    write("Congratultations."), nl, halt(0).
+    write("You have successfully defeated all of the legendaries."), nl,
+    write("There's nothing that can interfere you anymore."), nl,
+    write("By this means your tasks just have finished,therefore now you rule all these territories."),nl,
+    write("Congratulations,Capt! I will see you on the next mission!"),nl,
+    write("All my respect goes to you!"),nl,halt(0).
 
 legendary_check:- !.
