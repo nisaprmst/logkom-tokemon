@@ -204,7 +204,7 @@ force_player_pick:-
     write("Use pick(Tokemon_NAME) to pick a Tokemon!"), nl,
     write("You own these Tokemons : "),
     player_tokemon_list(PLT),
-    list_writer(PLT),
+    list_writer(PLT), nl, nl,
     retract(game_state(_)),
     assertz(game_state(forced_pick)).
 
@@ -283,7 +283,7 @@ show_battle_status:-
     /* ENDDD */
 
     write("You own these Tokemons : "),
-    list_writer(PTL).
+    list_writer(PTL), nl, nl.
 
 tokemon_picker(_, [], _):- %Reached end of Tokemon List
     write("You do not have that Tokemon."), nl, !.
