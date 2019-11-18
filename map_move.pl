@@ -58,13 +58,11 @@ left:-
 
 left:- 
 	/* command to move left, start battle */
-	
+	ketemutokemon,
 	playerloc(X, Y),
 	New is Y + 1,
 	retract(playerloc(X,Y)),
-	assert(playerloc(X,New)),
-    write('Kamu bergerak ke kiri yey'), nl, 
-	ketemutokemon, !.
+	assert(playerloc(X,New)), !.
 
 left:- 
 	/* command to move left */
@@ -95,13 +93,11 @@ up:-
 
 up:- 
 	/* command to move up, start battle */
-	
+	ketemutokemon,
 	playerloc(X, Y),
 	New is X - 1,
 	retract(playerloc(X,Y)),
-	assert(playerloc(New,Y)),
-    write('Kamu bergerak ke atas yey'), nl, 
-	ketemutokemon, !.
+	assert(playerloc(New,Y)), !.
 
 up:- 
 	/* command to move up */
@@ -132,13 +128,11 @@ right:-
 
 right:- 
 	/* command to move right, start battle */
-	
+	ketemutokemon,
 	playerloc(X, Y),
 	New is Y - 1,
 	retract(playerloc(X,Y)),
-	assert(playerloc(X,New)),
-    write('Kamu bergerak ke kanan yey'), nl, 
-	ketemutokemon, !.
+	assert(playerloc(X,New)), !.
 
 right:- 
 	/* command to move right */
@@ -169,13 +163,11 @@ down:-
 
 down:- 
 	/* command to move down */
-	
+	ketemutokemon,
 	playerloc(X, Y),
 	New is X + 1,
 	retract(playerloc(X,Y)),
-	assert(playerloc(New,Y)),
-    write('Kamu bergerak ke bawah yey'), nl, 
-	ketemutokemon, !.
+	assert(playerloc(New,Y)), !.
 
 down:- 
 	/* command to move down */
@@ -187,7 +179,7 @@ down:-
     write('Kamu bergerak ke bawah yey'), nl, !.
 
 ketemutokemon:-
-	random_between(1, 10, N),
+	random_between(1, 30, N),
 	tokemon(N, A),
 	battletokemon(X),
 	retract(battletokemon(X)),
