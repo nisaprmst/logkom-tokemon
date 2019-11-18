@@ -5,6 +5,7 @@
 
 
 % some dynamic variables
+:- dynamic(game_battle/1). game_battle(0).
 :- dynamic(game_state/1). game_state(battle).
 
 
@@ -55,6 +56,3 @@
 :- multifile(capturable/1).
 
 :- multifile(legend_tokemon_list/1).
-
-
-

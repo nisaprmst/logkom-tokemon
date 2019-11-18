@@ -99,6 +99,8 @@ drop(TOKEMON):-
 
 %Use this to first initiate the battle, this 'should' lock the player between choosing to run or fight
 encounter_tokemon(Wild_tokemon, Waiting_list):-
+    retract(game_battle(0)),
+    assertz(game_battle(1)),
     format("~p leapt out and seems ready to attack you!~n", [Wild_tokemon]),
     retract(wild_encountered_tokemon(_)),
     retract(enemy_waiting_list(_)),
@@ -429,6 +431,8 @@ kill_enemy:-
 player_wins_battle:-
     retract(game_state(_)),
     assertz(game_state(move)),
+    retract(game_battle(1)),
+    assertz(game_battle(0)),
     write("You won the battle."), nl,
     write("You, and your Tokemons, sighed in relief."), nl,
     reset_dynamics.

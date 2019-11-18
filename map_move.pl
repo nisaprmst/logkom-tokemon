@@ -59,6 +59,24 @@ heal :-
 	game_running(0),
 	write('Please start the game first before using this command.'),nl,nl,!.
 
+left :-
+	/* lagi di battle */
+	game_battle(1),
+	write('The battle has started, you cannot move now!.'),nl,nl,!.
+right :-
+	/* lagi di battle */
+	game_battle(1),
+	write('The battle has started, you cannot move now!.'),nl,nl,!.
+down :-
+	/* lagi di battle */
+	game_battle(1),
+	write('The battle has started, you cannot move now!.'),nl,nl,!.
+up :-
+	/* lagi di battle */
+	game_battle(1),
+	write('The battle has started, you cannot move now!.'),nl,nl,!.
+
+
 left:- 
 	/* command to move left : fail condition */
 
