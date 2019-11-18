@@ -12,6 +12,11 @@
 :- dynamic(player_tokemon_list/1). player_tokemon_list([]).
 :- dynamic(player_tokemon_health_list/1). player_tokemon_health_list([]).
 :- dynamic(player_tokemon_enhancemnt_list/1). player_tokemon_enhancemnt_list([]).
+:- dynamic(player_tokemon_na_mod_list/1). player_tokemon_na_mod_list([]).
+:- dynamic(player_tokemon_skill_mod_list/1). player_tokemon_skill_mod_list([]).
+:- dynamic(player_tokemon_hp_mod_list/1). player_tokemon_hp_mod_list([]).
+:- dynamic(player_tokemon_exp_list/1). player_tokemon_exp_list([]).
+:- dynamic(player_tokemon_level_list/1). player_tokemon_level_list([]).
 
 :- dynamic(player_inventory/3).  	player_inventory([], [], []).
 
@@ -38,6 +43,12 @@
 :- multifile(player_tokemon_list/1).
 :- multifile(player_tokemon_health_list/1).
 :- multifile(player_tokemon_enhancemnt_list/1).
+
+:- multifile(player_tokemon_na_mod_list/1).
+:- multifile(player_tokemon_skill_mod_list/1).
+:- multifile(player_tokemon_hp_mod_list/1).
+:- multifile(player_tokemon_exp_list/1).
+:- multifile(player_tokemon_level_list/1).
 
 :- multifile(player_inventory/3).
 

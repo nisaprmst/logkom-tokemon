@@ -2,7 +2,7 @@
 
 :- include('tokemon.pl').
 :- include('inventory.pl').
-:- include('dynamics.pl'). 
+%:- include('dynamics.pl'). 
 
 
 
@@ -27,6 +27,10 @@ pick(Tokemon):-
     player_tokemon_list(PTL),
     tokemon_picker(Tokemon, PTL, 1).
 
+switch(Tokemon):-
+    player_tokemon_list(PTL),
+    tokemon_switcher(Tokemon, PTL, 1).
+
 
 run:-
     game_state(Current_GAME_STATE),
@@ -42,8 +46,11 @@ run:-
         reset_dynamics,
         retract(game_state(_)),
         assertz(game_state(move)),
-        write("You managed to run away."),
-        write("You sighed in relief."));(write("You failed to run away to safety!"), nl,
+        write("You managed to run away."), nl,
+        write("You sighed in relief."),
+        retract(game_battle(_)),
+        assertz(game_battle(0))
+        );(write("You failed to run away to safety!"), nl,
             write("Better get a Tokemon out quickly before everything is too late!"), nl,
             fight).
 
@@ -51,6 +58,7 @@ fight:-
     game_state(Current_GAME_STATE),
     Current_GAME_STATE == encounter,
     write("You decided to fight the Tokemon."), nl,
+    force_player_pick,
     retract(game_state(_)),
     assertz(game_state(forced_pick)).
 
@@ -148,6 +156,29 @@ get_enhancement_list_from_inventory(Enhancement_List):-
     append([EN_List_1], EN_List_2, Enhancement_List).
 
 
+get_TK_enhancement(TK_NUM):-
+    player_tokemon_na_mod_list(NA_MODL),
+	player_tokemon_skill_mod_list(SKILL_MODL),
+	player_tokemon_hp_mod_list(HP_MODL),
+	player_tokemon_exp_list(EXP_MODL),
+    player_tokemon_level_list(LVL_MODL),
+    
+    get_item_num(NA_MODL, TK_NUM, 1, OLD_NA_MODIF),
+	get_item_num(SKILL_MODL, TK_NUM, 1, OLD_SKILL_MODIF),
+	get_item_num(HP_MODL, TK_NUM, 1, OLD_HEALTH_MODIF),
+	get_item_num(EXP_MODL, TK_NUM, 1, OLD_EXP),
+    get_item_num(LVL_MODL, TK_NUM, 1, OLD_LEVEL),
+    
+    append([], [OLD_NA_MODIF], EL_NA),
+    append(EL_NA, [OLD_SKILL_MODIF], EL_NA_S),
+    append(EL_NA_S, [OLD_HEALTH_MODIF], EL_NA_S_H),
+    append(EL_NA_S_H, [OLD_EXP], EL_NA_S_H_XP),
+    append(EL_NA_S_H_XP, [OLD_LEVEL], EL_NA_S_H_XP_LV),
+
+    retract(picked_tokemon_enhancment(_)),
+    assertz(picked_tokemon_enhancment(EL_NA_S_H_XP_LV)).
+
+
 initalize_battle(PTOKEMON, Enemy_tokemon):-
     retract(player_battle_tokemon(_)),
     assertz(player_battle_tokemon(PTOKEMON)),
@@ -155,6 +186,10 @@ initalize_battle(PTOKEMON, Enemy_tokemon):-
     health(PTHEALTH, PTOKEMON),
     %format("PHealth    : ~p~n", [PTHEALTH]),
     assertz(picked_tokemon_health(PTHEALTH)),
+    picked_tokemon_num(TK_N),
+    get_TK_enhancement(TK_N),
+
+
     retract(opposing_tokemon(_)),
     %write("ROT"),
     assertz(opposing_tokemon(Enemy_tokemon)),
@@ -166,7 +201,8 @@ initalize_battle(PTOKEMON, Enemy_tokemon):-
 	
 force_player_pick:-
     write("Select a Tokemon to battle with!"),nl,
-    write("Use pick([Tokemon_NAME]) to pick a Tokemon!"), nl,
+    write("Use pick(Tokemon_NAME) to pick a Tokemon!"), nl,
+    write("You own these Tokemons : "),
     player_tokemon_list(PLT),
     list_writer(PLT),
     retract(game_state(_)),
@@ -239,19 +275,44 @@ tokemon_picker(Tokemon, Inventory_List, N):- %Head is NOT the picked tokemon
     NeoN is N + 1,
     tokemon_picker(Tokemon, Tail, NeoN).
 
+tokemon_switcher(_, [], _):- %Reached end of Tokemon List
+    write("You do not have that Tokemon."), nl, !.
+
+tokemon_switcher(Tokemon, Inventory_List, N):- %Head is the picked tokemon
+    [Head|_] = Inventory_List,
+    Tokemon == Head, !,
+    retract(picked_tokemon_num(_)),
+    assertz(picked_tokemon_num(N)),
+    wild_encountered_tokemon(Current_Foekemon),
+    format("You called ~p out forth to fight ~p!~n", [Tokemon, Current_Foekemon]),
+    player_switch_tokemon(N).
+
+tokemon_switcher(Tokemon, Inventory_List, N):- %Head is NOT the picked tokemon
+    [Head|Tail] = Inventory_List,
+    Tokemon \== Head,
+    NeoN is N + 1,
+    tokemon_switcher(Tokemon, Tail, NeoN).
+
 get_type_modifier(Attacker, Attackee, Modifier):-
     tipe(TAR, Attacker), tipe(TAE, Attackee), lawan(TAR, TAE),!, (Modifier is rational(1.5), write("It is super effective!"), nl); Modifier is rational(1).
 
 player_attack:-
     player_battle_tokemon(PBT),
     opposing_tokemon(OT),
+    picked_tokemon_enhancment(PTE),
     na(PBT, PNA),
     %format("PNA    : ~p~n", [PNA]),
     %insert enhancment modifier getter here pls
 
+    get_item_num(PTE, 1, 1, OLD_NA_MODIF),
+	get_item_num(PTE, 2, 1, OLD_SKILL_MODIF),
+	get_item_num(PTE, 3, 1, OLD_HEALTH_MODIF),
+	get_item_num(PTE, 4, 1, OLD_EXP),
+    get_item_num(PTE, 5, 1, OLD_LEVEL),
+
     get_type_modifier(PBT, OT, Type_Mod),
     %format("Type Mod    : ~p~n", [Type_Mod]),
-    DMG is floor(PNA * Type_Mod),
+    DMG is floor((PNA + OLD_NA_MODIF) * Type_Mod),
     %format("DMG    : ~p~n", [DMG]),
     opposing_tokemon_health(Old_o_hl),
     Neo_o_hl is (Old_o_hl - DMG),
@@ -260,7 +321,7 @@ player_attack:-
     assertz(opposing_tokemon_health(Neo_o_hl)),
     format("~p attacked and dealth ~p damage!~n", [PBT, DMG]),
     show_battle_status,
-    sleep(1),
+    sleep(1),!,
     check_enemy.
 
 player_skill:-
@@ -274,9 +335,17 @@ player_skill:-
     %format("~p used skill!~n", [PBT]),
     %insert enhancment modifier getter here pls
 
+    picked_tokemon_enhancment(PTE),
+
+    get_item_num(PTE, 1, 1, OLD_NA_MODIF),
+	get_item_num(PTE, 2, 1, OLD_SKILL_MODIF),
+	get_item_num(PTE, 3, 1, OLD_HEALTH_MODIF),
+	get_item_num(PTE, 4, 1, OLD_EXP),
+    get_item_num(PTE, 5, 1, OLD_LEVEL),
+
     get_type_modifier(PBT, OT, Type_Mod),
     %format("Type Mod    : ~p~n", [Type_Mod]),
-    DMG is floor(PSA * Type_Mod),
+    DMG is floor((PSA + OLD_SKILL_MODIF) * Type_Mod),
     %format("DMG    : ~p~n", [DMG]),
     opposing_tokemon_health(Old_o_hl),
     Neo_o_hl is (Old_o_hl - DMG),
@@ -291,19 +360,19 @@ player_skill:-
     check_enemy, !.
 
 check_enemy:-
-    %write("CHECK ENEMY TWOOOO!!!"), nl,
+    write("CHECK ENEMY TWOOOO!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health =< 0, !,
     kill_enemy.
 
 check_enemy:-
-    %write("CHECK ENEMY ONE!!!"), nl,
+    write("CHECK ENEMY ONE!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health > 0, !,
-    random_between(0, 11, Rando),!,
+    random_between(0, 11, Rando),
     %format("Rando    : ~p~n", [Rando]),
     %write("RANDOMISASI"), nl,
-    check_enemy_skill(Rando), !.
+    check_enemy_skill(Rando).
     %show_battle_status.
 
 check_player_battle_tokemon :-
@@ -315,6 +384,7 @@ check_player_battle_tokemon :-
 check_player_battle_tokemon :- !.
 
 check_enemy_skill(Random_Number):-
+    write("Check enemy skill ONE!!!"), nl,
     Random_Number > 8, !,
     opposing_tokemon_used_skill(OTSS),
     OTSS == 0,
@@ -323,6 +393,7 @@ check_enemy_skill(Random_Number):-
     assertz(opposing_tokemon_used_skill(1)).
 
 check_enemy_skill(Random_Number):-
+    write("Check enemy skill TWO!!!"), nl,
     Random_Number =< 8, !,
     enemy_attack, !.
 
@@ -453,7 +524,6 @@ player_set_battle_tokemon_to_inventory:-
 player_switch_tokemon(NEO_TKMN_NUMBER):-
     player_tokemon_list(PTL),
     player_tokemon_health_list(PTHL),
-    player_tokemon_enhancemnt_list(PTEL),
     player_battle_tokemon(OLD_PTokemon),
     format("You called ~p back to you.", [OLD_PTokemon]),
 
@@ -467,10 +537,7 @@ player_switch_tokemon(NEO_TKMN_NUMBER):-
     retract(picked_tokemon_health(_)),
     %format("PHealth    : ~p~n", [PTHEALTH]),
     assertz(picked_tokemon_health(PTHEALTH)),
-
-    get_item_num(PTEL, NEO_TKMN_NUMBER, 1, PENHANCEMNT),
-    retract(picked_tokemon_enhancment(_)),
-    assertz(picked_tokemon_enhancment(PENHANCEMNT)).
+    get_TK_enhancement(NEO_TKMN_NUMBER).
 
 enemy_go_to_next_tokemon:-
     enemy_waiting_list(EWL),
