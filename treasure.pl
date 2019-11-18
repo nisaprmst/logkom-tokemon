@@ -15,7 +15,7 @@ cekx:-
     X is 3,
     Y is 3,
     B is 0,
-    write('gada bray kan td udh diambil'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -23,17 +23,18 @@ cekx:-
     X is 3,
     Y is 3,
     B is 1,
-    write('+10 normal attack'),
-    write('TAPIIII -15 health'),
-    write('ambil or skip?'),nl ,!.
-
+    write('YOU JUST FOUND THE TREASURE!!'),nl,
+    write('Do you wish to take it?'),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
+    write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
+    
 cekx:-
     here('x',X,Y),
     treasure(X,Y,B),
     X is 3,
     Y is 4,
     B is 0,
-    write('gada bray kan td udh diambil'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -41,10 +42,10 @@ cekx:-
     X is 3,
     Y is 4,
     B is 1,
-    write('+5 normal attack'),
-    write('+5 skill'),
-    write('TAPIIII -10 health'),
-    write('ambil or skip?'),nl ,!.
+    write('YOU JUST FOUND THE TREASURE!!'),nl,
+    write('Do you wish to take it?'),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
+    write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
     here('x',X,Y),
@@ -52,7 +53,7 @@ cekx:-
     X is 3,
     Y is 5,
     B is 0,
-    write('gada bray kan td udh diambil'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -60,10 +61,10 @@ cekx:-
     X is 3,
     Y is 5,
     B is 1,
-    write('+10 health'),
-    write('+15 normal attack'),
-    write('TAPIIII -15 skill'),
-    write('ambil or skip?'),nl ,!.
+    write('YOU JUST FOUND THE TREASURE!!'),nl,
+    write('Do you wish to take it?'),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
+    write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
     here('x',X,Y),
@@ -71,7 +72,7 @@ cekx:-
     X is 3,
     Y is 1,
     B is 0,
-    write('gada bray kan td udh diambil'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -79,10 +80,10 @@ cekx:-
     X is 3,
     Y is 1,
     B is 1,
-    write('+5 skill'),
-    write('+5 health'),
-    write('TAPIIII -5 normal attack'),
-    write('ambil or skip?'),nl ,!.
+    write('YOU JUST FOUND THE TREASURE!!'),nl,
+    write('Do you wish to take it?'),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
+    write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 cekx:-
     here('x',X,Y),
@@ -90,7 +91,7 @@ cekx:-
     X is 4,
     Y is 3,
     B is 0,
-    write('gada bray kan td udh diambil'),nl ,!.
+    write('Theres nothing here.You have received the treasure before!'),nl ,!.
 
 cekx:-
     here('x',X,Y),
@@ -98,10 +99,10 @@ cekx:-
     X is 4,
     Y is 3,
     B is 1,
-    write('+5 skill'),
-    write('+10 normal attack'),
-    write('TAPIIII -20 health'),
-    write('ambil or skip?'),nl ,!.
+    write('YOU JUST FOUND THE TREASURE!!'),nl,
+    write('Do you wish to take it?'),nl,
+    write('Effect and Requirements : +10 Health , +15 Normal Attack, -15 Skill'),nl,
+    write('Write "ambil" to take it,or "skip" to pass it.'),nl, !.
 
 ambil:-
     here('x',X,Y),
@@ -109,7 +110,7 @@ ambil:-
     X is 3,
     Y is 3,
     B is 1,
-    write('ayo pilih tokemon buat gali'),
+    write('Please select tokemon that used to open the treasure!'),
     get_tokemon_list_from_inventory(Tokemon_List),
     pick(Tokemon),
     /* h-15 */
@@ -127,7 +128,7 @@ ambil:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack'),nl ,!.
+    write('Congratulations! You just gain more normal attack!'),nl ,!.
 
 ambil:-
     here('x',X,Y),
@@ -158,7 +159,7 @@ ambil:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and skill'),nl ,!.
+    write('Congratulations! You just gain more normal attack and skill!'),nl ,!.
 
 ambil:-
     here('x',X,Y),
@@ -189,7 +190,7 @@ ambil:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and health'),nl ,!.
+    write('Congratulations! You just gain more normal attack and skill!'),nl ,!.
 
 ambil:-
     here('x',X,Y),
@@ -220,7 +221,7 @@ ambil:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more health and skill'),nl ,!.
+    write('Congratulations! You just gain more normal attack and skill!'),nl ,!.
 
 ambil:-
     here('x',X,Y),
@@ -251,4 +252,4 @@ ambil:-
     retract(treasure(X,Y,B)),
     assert(treasure(X,Y,new_b)),
 
-    write('hore u just gain more normal attack and skill'),nl ,!.
+    write('Congratulations! You just gain more normal attack and skill!'),nl ,!.
