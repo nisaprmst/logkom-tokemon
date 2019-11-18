@@ -17,14 +17,14 @@ battletokemon(none).
 has_healed(none).
 
 % here(Prop, Row, Col).
-here('G', 5, 5).
-here('x', 3, 3).
-here('x', 3, 4).
-here('x', 3, 5).
-here('x', 3, 1).
-here('x', 4, 3).
-here('P', Row, Col):- playerloc(R, C), R is Row, C is Col.
-here('-', Row, Col):- here(_, R, C), Row =\= R, Col =\= C.
+here(g, 5, 5).
+here(x, 3, 3).
+here(x, 3, 4).
+here(x, 3, 5).
+here(x, 3, 1).
+here(x, 4, 3).
+here(p, Row, Col):- playerloc(R, C), R is Row, C is Col.
+here(-, Row, Col):- here(_, R, C), Row \= R, Col \= C.
 
 
 printtepi(1):- write("xxxxx"), nl.
@@ -44,7 +44,7 @@ left:-
 	playerloc(X, Y),
 	New is Y + 1,
 	New is 11,
-	write('Wadigidaw udah mentok nih gan!'), nl, !.
+	write('You can't move left,you are on the edge of the map!'), nl, !.
 
 left:- 
 	/* command to move left : treasure */
@@ -62,7 +62,14 @@ left:-
 	playerloc(X, Y),
 	New is Y + 1,
 	retract(playerloc(X,Y)),
+<<<<<<< HEAD
 	assert(playerloc(X,New)), !.
+=======
+	assert(playerloc(X,New)),
+    write('You have succed to move left!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+	ketemutokemon, !.
+>>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 left:- 
 	/* command to move left */
@@ -71,7 +78,7 @@ left:-
 	New is Y + 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-    write('Kamu bergerak ke kiri yey'), nl, !.
+    write('You have succed to move left!'), nl, !.
 
 up:- 
 	/* command to move up : fail condition */
@@ -79,7 +86,7 @@ up:-
 	playerloc(X, Y),
 	New is X - 1,
 	New is 0,
-	write('Wadigidaw udah mentok nih gan!'), nl, !.
+	write('You can't move up,you are on the edge of the map!'), nl, !.
 
 up:- 
 	/* command to move up : treasure */
@@ -97,7 +104,14 @@ up:-
 	playerloc(X, Y),
 	New is X - 1,
 	retract(playerloc(X,Y)),
+<<<<<<< HEAD
 	assert(playerloc(New,Y)), !.
+=======
+	assert(playerloc(New,Y)),
+    write('You have succed to move up!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+	ketemutokemon, !.
+>>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 up:- 
 	/* command to move up */
@@ -106,7 +120,7 @@ up:-
 	New is X - 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
-    write('Kamu bergerak ke atas yey'), nl, !.
+    write('You have succed to move up!'), nl, !.
 
 right:- 
 	/* command to move down : fail condition */
@@ -114,7 +128,7 @@ right:-
 	playerloc(X, Y),
 	New is Y - 1,
 	New is 0,
-	write('Wadigidaw udah mentok nih gan!'), nl, !.
+	write('You can't move right,you are on the edge of the map'), nl, !.
 
 right:- 
 	/* command to move down : treasure */
@@ -132,7 +146,14 @@ right:-
 	playerloc(X, Y),
 	New is Y - 1,
 	retract(playerloc(X,Y)),
+<<<<<<< HEAD
 	assert(playerloc(X,New)), !.
+=======
+	assert(playerloc(X,New)),
+    write('You have succed to move right!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+	ketemutokemon, !.
+>>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 right:- 
 	/* command to move right */
@@ -141,7 +162,7 @@ right:-
 	New is Y - 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(X,New)),
-    write('Kamu bergerak ke kanan yey'), nl, !.
+    write('You have succed to move right!'), nl, !.
 
 down:- 
 	/* command to move down : fail condition */
@@ -149,7 +170,7 @@ down:-
 	playerloc(X, Y),
 	New is X + 1,
 	New is 11,
-	write('Wadigidaw udah mentok nih gan!'), nl, !.
+	write('You can't move down,you are on the edge of the map!'), nl, !.
 
 down:- 
 	/* command to move down : treasure */
@@ -167,7 +188,14 @@ down:-
 	playerloc(X, Y),
 	New is X + 1,
 	retract(playerloc(X,Y)),
+<<<<<<< HEAD
 	assert(playerloc(New,Y)), !.
+=======
+	assert(playerloc(New,Y)),
+    write('You have succed to move down!'), nl, 
+    write('REMEMBER!!! When you are in the battle you CAN'T MOVE anywhere else. Take the Battle or Run !'),nl,
+	ketemutokemon, !.
+>>>>>>> e23f039203298048ae240cbd8ec4281e5adc5f71
 
 down:- 
 	/* command to move down */
@@ -176,7 +204,7 @@ down:-
 	New is X + 1,
 	retract(playerloc(X,Y)),
 	assert(playerloc(New,Y)),
-    write('Kamu bergerak ke bawah yey'), nl, !.
+    write('You have succed to move down!'), nl, !.
 
 ketemutokemon:-
 	random_between(1, 30, N),
@@ -190,25 +218,13 @@ ketemutokemon:-
 	/* write('Ada tokemon '), write(A), write('!'), nl,
 	write('Battle/run?'), nl, !. */
 
-
-heal:- 
-	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == '-',
-	write("You must be at the Tokemon Gym to heal."), nl.
-
-heal:- 
-	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'x',
-	write("You must be at the Tokemon Gym to heal."), nl.
-
 heal:-
 	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'G',
+	PX == 5, PY ==5,
+	%here(MAP_OBJECT, PX, PY),
+	%MAP_OBJECT == g,
 	has_healed(Heal_Bool),
-	Heal_Bool == none,
+	Heal_Bool == none, !,
 	write("You stepped inside the Tokemon Gym in the middle of nowhere."), nl,
 	write("It was derelict, but you found some useful supplies to heal your Tokemons."), nl,
 	write("You quickly healed your Tokemons and left the Gym post-haste."), nl,
@@ -218,12 +234,12 @@ heal:-
 	retract(has_healed(_)),
 	assertz(has_healed(yes)).
 
-
 heal:-
 	playerloc(PX, PY),
-	here(MAP_OBJECT, PX, PY),
-	MAP_OBJECT == 'G',
+	PX \= 5, PY \=5,
+	write("You must be at the Tokemon Gym to heal."), nl.
+
+heal:-
 	has_healed(Heal_Bool),
 	Heal_Bool \= none,
-	write("The Gym has collapsed."), nl,
-	write("You cannot heal anything within it any longer."), nl.
+	write("The Tokemon Gym has collapsed, you cannot heal within it any longer."), nl.

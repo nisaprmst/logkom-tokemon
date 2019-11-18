@@ -57,7 +57,7 @@ fight:-
 capture:-
     capturable(TK_Cap),
     TK_Cap == none,
-    write("There is NOTHING to capture."), nl.
+    write("There is NOTHING to capture."), nl, fail.
 
 capture:-
     capturable(TK_Cap),
@@ -65,7 +65,7 @@ capture:-
     player_tokemon_list(PTL),
     list_count(PTL, PTL_LEN),
     PTL_LEN > 5,
-    write("You have too Tokemons many with you, drop(TOKEMON_NAME). a Tokemon first to capture this one."), nl.
+    write("You have too Tokemons many with you, drop(TOKEMON_NAME). a Tokemon first to capture this one."), nl, fail.
 
 capture:-
     capturable(TK_Cap),
@@ -171,6 +171,7 @@ force_player_pick:-
     assertz(game_state(forced_pick)).
 
 show_battle_status:-
+    nl,
     enemy_waiting_list(EWL),
     list_count(EWL, EWL_Len),
     EWL_Len > 0, nl,
@@ -180,8 +181,8 @@ show_battle_status:-
     opposing_tokemon_health(OTH),
     format("~p~n", [OT]),
     format("Type : ~p~n", [OTT]),
-    format("Health : ~p~n", [OTH]),
-    format("There seem to be ~p more Tokemon hiding near, ready to attack.~n",[EWL_Len]),
+    format("Health : ~p~n", [OTH]), nl,
+    format("There seem to be ~p more Tokemon hiding near, ready to attack.~n",[EWL_Len]), nl,
 
     nl, write("Your Tokemon :"), nl,
     player_tokemon_list(PTL),
@@ -190,9 +191,9 @@ show_battle_status:-
     picked_tokemon_health(PTH),
     format("~p~n", [PBT]),
     format("Type : ~p~n", [PBTT]),
-    format("Health : ~p~n", [PTH]),
+    format("Health : ~p~n", [PTH]), nl,
     write("You own these Tokemons : "),
-    list_writer(PTL), nl.
+    list_writer(PTL), nl, nl.
 
 show_battle_status:-
     enemy_waiting_list(EWL),
@@ -243,7 +244,7 @@ player_attack:-
     player_battle_tokemon(PBT),
     opposing_tokemon(OT),
     na(PBT, PNA),
-    format("PNA    : ~p~n", [PNA]),
+    %format("PNA    : ~p~n", [PNA]),
     %insert enhancment modifier getter here pls
 
     get_type_modifier(PBT, OT, Type_Mod),
@@ -261,7 +262,7 @@ player_attack:-
     check_enemy.
 
 player_skill:-
-    write("SKILLL"),
+    %write("SKILLL"),
     picked_tokemon_used_skill(PTSS),
     PTSS == 0,
     player_battle_tokemon(PBT),
@@ -288,13 +289,13 @@ player_skill:-
     check_enemy, !.
 
 check_enemy:-
-    write("CHECK ENEMY TWOOOO!!!"), nl,
+    %write("CHECK ENEMY TWOOOO!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health =< 0, !,
     kill_enemy.
 
 check_enemy:-
-    write("CHECK ENEMY ONE!!!"), nl,
+    %write("CHECK ENEMY ONE!!!"), nl,
     opposing_tokemon_health(Enemy_Health),
     Enemy_Health > 0, !,
     random_between(0, 11, Rando),!,
@@ -327,7 +328,7 @@ enemy_attack:-
     player_battle_tokemon(PBT),
     opposing_tokemon(OT),
     na(OT, OTNA),
-    format("OTNA    : ~p~n", [OTNA]),
+    %format("OTNA    : ~p~n", [OTNA]),
     %insert enhancment modifier getter here pls
 
     get_type_modifier(OT, PBT, Type_Mod),
@@ -364,6 +365,42 @@ enemy_skill:-
     show_battle_status, !, check_player_battle_tokemon, !.
     
 kill_enemy:-
+    %Killed a legendary tokemon with no hiders
+    enemy_waiting_list(EWL),
+    EWL == [],
+    write("YOU WON!"), nl,
+    opposing_tokemon(OT),
+    legendtokemon(_, OT), !,
+    format("The Legendary ~p looked at you meekly, its rage subsiding.~n", [OT]),
+    write("Quick! capture. the legendary Tokemon!"), nl,
+    write("Or you could just walk away and leave it there. A fitting fate, perhaps."), nl,
+    player_set_battle_tokemon_to_inventory,
+    legend_tokemon_list(RLL),
+    schTK_num(RLL, OT, N),
+    del_list_num(RLL, N, 1, NEO_RLL),
+    retract(legend_tokemon_list(_)),
+    assertz(legend_tokemon_list(NEO_RLL)),
+    retract(capturable(_)),
+    assertz(capturable(OT)),
+    player_wins_battle,
+    legendary_check.
+
+kill_enemy:-
+    % Killed a legendary tokemon with hiders
+    enemy_waiting_list(EWL),
+    EWL \= [],
+    [Next_Foekemon|_] is EWL,
+    opposing_tokemon(OT),
+    legendtokemon(_, OT), !,
+    format("~p leaped out of its hiding place after the legendary was felled!~n", [Next_Foekemon]),
+    format("~p looked at you meekly, its rage subsiding.~n", [OT]),
+    format("Quick! capture. ~p the legedary to your roster before ~p attacks!~n", [OT, Next_Foekemon]),
+    player_set_battle_tokemon_to_inventory,
+    retract(capturable(_)),
+    assertz(capturable(OT)),
+    enemy_go_to_next_tokemon.
+
+kill_enemy:-
     enemy_waiting_list(EWL),
     EWL == [],
     write("YOU WON!"), nl,
@@ -374,11 +411,11 @@ kill_enemy:-
     player_set_battle_tokemon_to_inventory,
     retract(capturable(_)),
     assertz(capturable(OT)),
-    player_wins_battle.
+    player_wins_battle, legendary_check.
 
 kill_enemy:-
     enemy_waiting_list(EWL),
-    EWL,
+    EWL \= [],
     [Next_Foekemon|_] is EWL,
     opposing_tokemon(OT),
     format("~p leaped out of its hiding place after its friend was felled!~n", [Next_Foekemon]),
@@ -505,3 +542,11 @@ reset_dynamics:-
 back_to_movement:-
     reset_dynamics,
     remove_capturable_Tokemon.
+
+legendary_check:-
+    legend_tokemon_list(RLL),
+    RLL == [],
+    write("You have successfully defeated the legendaries."), nl,
+    write("Congratultations."), nl, halt(0).
+
+legendary_check:- !.
